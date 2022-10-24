@@ -1,0 +1,24 @@
+{
+  "timeout": "60s",
+  "query": {
+    "bool": {
+      "adjust_pure_negative": true,
+      "boost": 1.0
+    }
+  },
+  "sort": [
+    {
+      "_script": {
+        "script": {
+          "source": "doc['amount'].value + params.subPrice",
+          "lang": "painless",
+          "params": {
+            "subPrice": "5"
+          }
+        },
+        "type": "number",
+        "order": "asc"
+      }
+    }
+  ]
+}}
